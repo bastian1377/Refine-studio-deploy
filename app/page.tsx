@@ -52,7 +52,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/60 z-10" />
           <div className="relative h-[70vh] overflow-hidden">
             <Image
-              src="/placeholder.svg?height=1080&width=1920"
+              src="/refinelogo.jpeg"
               alt="Salon interior"
               fill
               className="object-cover"
@@ -102,7 +102,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
-                    <span>123 Beauty Lane, City</span>
+                    <span>412 W 10th St, Odessa, TX 79761</span>
                   </div>
                 </div>
               </div>
@@ -370,10 +370,10 @@ export default function Home() {
                     <h3 className="font-medium text-lg">Email</h3>
                     <p className="text-muted-foreground">
                       <Link
-                        href="mailto:info@refinestudio.com?subject=Inquiry%20from%20Website&body=Hello%20Refine%20Studio%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20services.%0A%0AThank%20you%2C%0A"
+                        href="mailto:refinestudio40@gmail.com?subject=Inquiry%20from%20Website&body=Hello%20Refine%20Studio%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20services.%0A%0AThank%20you%2C%0A"
                         className="hover:underline text-primary"
                       >
-                        info@refinestudio.com
+                        refinestudio40@gmail.com
                       </Link>
                     </p>
                   </div>
@@ -393,7 +393,7 @@ export default function Home() {
               <div className="flex justify-center gap-4 mt-10">
                 <Button variant="outline" size="lg" asChild>
                   <Link
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/_refine_studio?igsh=dDNsc2VoNjRtZXp5"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2"
@@ -404,7 +404,7 @@ export default function Home() {
                 </Button>
                 <Button variant="outline" size="lg" asChild>
                   <Link
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/share/151A5Pnamy/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2"
@@ -447,4 +447,3 @@ export default function Home() {
     </div>
   )
 }
-

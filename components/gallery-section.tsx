@@ -14,7 +14,7 @@ export function GallerySection() {
       className: "md:col-span-2 md:row-span-2",
     },
     {
-      src: "/placeholder.svg?height=600&width=600",
+      src: "/inside.jpeg",
       alt: "Salon interior",
       className: "md:col-span-2",
     },
