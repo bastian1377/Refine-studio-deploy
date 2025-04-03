@@ -339,7 +339,7 @@ export default function Home() {
                   <MapPin className="h-6 w-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium text-lg">Address</h3>
-                    <p className="text-muted-foreground">123 Beauty Lane, City, State 12345</p>
+                    <p className="text-muted-foreground">412 W 10th St, odessa, tx 79761</p>
                   </div>
                 </div>
 
@@ -360,7 +360,7 @@ export default function Home() {
                         Text
                       </Link>
                     </div>
-                    <p className="text-muted-foreground mt-1">(123) 456-7890</p>
+                    <p className="text-muted-foreground mt-1">(432) 385-9381</p>
                   </div>
                 </div>
 
