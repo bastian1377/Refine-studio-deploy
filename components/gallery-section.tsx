@@ -19,7 +19,7 @@ export function GallerySection() {
       className: "md:col-span-2",
     },
     {
-      src: "/placeholder.svg?height=600&width=600",
+      src: "/chair.jpeg",
       alt: "Hair coloring result",
     },
     {

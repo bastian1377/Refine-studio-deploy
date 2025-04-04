@@ -1,14 +1,449 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Clock, MapPin, Phone, Mail, Instagram, Facebook, ChevronRight, Star, MessageSquare } from "lucide-react"
-import { ServiceCard } from "@/components/service-card"
+import { Clock, MapPin, Phone, Mail, Instagram, Facebook, ChevronRight, Star, MessageSquare, ChevronUp, ChevronDown, User } from "lucide-react"
 import { TestimonialCard } from "@/components/testimonial-card"
 import { GallerySection } from "@/components/gallery-section"
 import { BookingSection } from "@/components/booking-section"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+
+interface ServiceCardProps {
+  title: string
+  description: string
+  price: string
+  duration: string
+  imageSrc: string
+  stylist?: string
+  stylistId?: string
+}
+
+interface ServiceType {
+  title: string
+  description: string
+  price: string
+  duration: string
+  imageSrc: string
+  stylist?: string
+  stylistId?: string
+}
+
+export function ServiceCard({ title, description, price, duration, imageSrc, stylist, stylistId }: ServiceCardProps) {
+  return (
+    <Card className="overflow-hidden transition-all duration-200 hover:shadow-md">
+      <div className="relative h-48 overflow-hidden">
+        <Image
+          src={imageSrc || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+      <CardContent className="p-6">
+        <div className="space-y-2">
+          <h3 className="font-bold text-xl">{title}</h3>
+          <p className="text-muted-foreground">{description}</p>
+
+          {stylist && (
+            <div className="flex items-center gap-1 text-sm mt-2">
+              <User className="h-3.5 w-3.5 text-primary" />
+              <span>By {stylist}</span>
+            </div>
+          )}
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-between p-6 pt-0">
+        <div>
+          <p className="font-medium text-lg">{price}</p>
+          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+            <Clock className="h-3.5 w-3.5" />
+            <span>{duration}</span>
+          </div>
+        </div>
+        <Button asChild>
+          <Link href={stylistId ? `#booking?stylist=${stylistId}` : "#booking"}>Book</Link>
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
 
 export default function Home() {
+  const [showAllServices, setShowAllServices] = useState(false)
+  const [activeTab, setActiveTab] = useState("hair")
+
+  const initialServicesToShow = 3
+
+  const barberServices = [
+    {
+      title: "Men's Haircuts",
+      description: "any type of fade with clippers and shears included, Line ups are included if asked for. by Jose Luis",
+      price: "From $35",
+      duration: "50 mins",
+      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1132148/inspiration/fa922c698fe1482e811c6f06718306-joseluis-sanchez-inspiration-edd9ea785a72421e9cc38e790de306-booksy.jpeg?size=360x360",
+      stylist: "Jose Luis",
+      stylistId: "stylist1"
+    },
+    {
+      title: "Haircut and beard trim",
+      description: "Any type of haircut with beard work using clippers and shears. Line up (edge up) with trimmers and razor.",
+      price: "From $40",
+      duration: "1 hour",
+      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1132148/service_photos/0c379e6f766449dcac6fe720b87f9c3f.jpeg",
+      stylist: "Jose Luis",
+      stylistId: "stylist1"
+    },
+    {
+      title: "Mens haircuts",
+      description: "Standard haircut with clippers and shears.",
+      price: "From $40",
+      duration: "50 mins",
+      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/2767a6fecf7142eea9327ea198fae5-yanet-kutz-inspiration-bd9d4d6846c4477f8a7a375977a4c0-booksy.jpeg?size=1170x1170",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist2"
+    },
+    {
+      title: "Hairuct and Beard trim",
+      description: "Standard beard work with blade.",
+      price: "From 15",
+      duration: "15 mins",
+      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/754aa7d7595d4b78b13315a69347e8-yanet-kutz-inspiration-98fbf198aa4f49409036e60b0f4c4b-booksy.jpeg?size=1170x1170",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist2"
+    },
+    {
+      title: "kids cuts 15yrs and younger",
+      description: "kids haircuts.",
+      price: "From 35",
+      duration: "40 min",
+      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/9e8d990153ba4636b5a59a05227ebb-yanet-kutz-inspiration-8891141abf26470bafb7af2c16c75a-booksy.jpeg?size=1170x1170",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist2"
+    },
+    {
+      title: "Mens haircut",
+      description: "Standard mens haircut.",
+      price: "From 35+",
+      duration: "50 min",
+      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1290693/inspiration/418ca23c895e4f1aa4b1092c219924-pam-inspiration-793fbf7a2a3e42e98137c27f058446-booksy.jpeg?size=1170x1170",
+      stylist: "Pam Chavez",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Mens design",
+      description: "Design of your choice.",
+      price: "From 15+",
+      duration: "15 min",
+      imageSrc:"https://d2zdpiztbgorvt.cloudfront.net/region1/us/1290693/inspiration/4cf25ea8dc064acca8e9fb0ab365e4-pam-inspiration-4c2aaf62db684a26a8eb26e1193b36-booksy.jpeg?size=1170x1170",
+      stylist: "Pam Chavez",
+      stylistId: "stylist3"
+    },
+  ]
+
+  const nailServices = [
+    {
+      title: "Manicure",
+      description: "Classic or gel manicures with a wide range of colors to choose from.",
+      price: "From $30+",
+      duration: "40 mins",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "soak off",
+      description: ".",
+      price: "From $20+",
+      duration: "30 mins",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "overlay",
+      description: ".",
+      price: "From $45+",
+      duration: "45 mins",
+      imageSrc: "red.jpeg",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Fill",
+      description: ".",
+      price: "From $50",
+      duration: "1h 50min",
+      imageSrc: "spotblue.jpeg",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Acrylic Nails Size 1-2(s)",
+      description: ".",
+      price: "From $55+",
+      duration: "1 hour",
+      imageSrc: "cow.jpeg",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Acrylic Nails Size 1-2(S)",
+      description: ".",
+      price: "From $55+",
+      duration: "1 hour",
+      imageSrc: "pink.jpeg",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Acrylic Nails Size 3-4(M)",
+      description: ".",
+      price: "From $60+",
+      duration: "1h 30min",
+      imageSrc: "blue.jpeg",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Acrylic Nails Size 5-6(L)",
+      description: ".",
+      price: "From $65+",
+      duration: "1h 55min",
+      imageSrc: "bow.jpeg",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Acrylic Nails Size 7-8(XL)",
+      description: ".",
+      price: "From $75+",
+      duration: "2h 20min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Acrylic Nails Size (XXL)",
+      description: ".",
+      price: "From $100",
+      duration: "3 hours",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+    {
+      title: "Dry Acrylic Predicure",
+      description: ".",
+      price: "From $55+",
+      duration: "3 hours",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Lily Gallegos",
+      stylistId: "stylist3"
+    },
+  ]
+
+  const womensServices = [
+    {
+      title: "Women's Haircut and Styling",
+      description: "Precision cutting and styling tailored to women's preferences.",
+      price: "From $45",
+      duration: "45 mins",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Shampoo",
+      description: "Enjoy a relaxing shampoo treatment that gently cleanses the scalp and hair, promoting healthy shine and softness.",
+      price: "From $45",
+      duration: "45 mins",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+    {
+      title: "wash and style",
+      description: "Revitalizing wash with scalp massage and professional shampoo tailored to your hair type. Leaves hair clean, refreshed, and ready for styling.",
+      price: "From $15",
+      duration: "30 mins",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Color no bleach",
+      description: "Enhance your natural shade or try something new with a single-process color treatment—no bleach involved.",
+      price: "From $100+",
+      duration: "2 hours",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Root touch up single color",
+      description: "Refresh your color and maintain a seamless look with a root touch-up using single-process color. Perfect for covering grays or maintaining your existing shade.",
+      price: "From $70+",
+      duration: "1h 30 min ",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Womens perm long",
+      description: "Add lasting volume, texture, and waves with a customized perm designed for long hair. Includes consultation, perm solution, and finishing style for beautiful, defined curls.",
+      price: "From $150+",
+      duration: "2h 55min ",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+    {
+      title: "little girls perm shoulder length",
+      description: "A gentle perm service designed for young girls with shoulder-length hair. Adds soft, bouncy curls while keeping comfort and care in mind throughout the process.",
+      price: "From $100+",
+      duration: "2h 30 min ",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist5"
+    },
+  ]
+
+  const lashServices = [
+    {
+      title: "Wispy",
+      description: "$25 deposit required.",
+      price: "From $120",
+      duration: "1h 50min",
+      imageSrc: "wispy.jpeg",
+      stylist: "Daharya Arellano",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Hybrid",
+      description: "$25 deposit required.",
+      price: "From $100",
+      duration: "1h 30min",
+      imageSrc: "hybrid.jpeg",
+      stylist: "Daharya Arellano",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Lashlift",
+      description: "$25 deposit required.",
+      price: "From $65",
+      duration: "1h",
+      imageSrc: "lashlift.jpeg",
+      stylist: "Daharya Arellano",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Megas",
+      description: "$25 deposit required.",
+      price: "From $130",
+      duration: "1h 50min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Daharya Arellano",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Mega fill",
+      description: "$25 deposit required.",
+      price: "From $100",
+      duration: "1h 20min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Daharya Arellano",
+      stylistId: "stylist5"
+    },
+    {
+      title: "Volume",
+      description: "$25 deposit required.",
+      price: "From $110",
+      duration: "1h 50min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Daharya Arellano",
+      stylistId: "stylist5"
+    },
+    
+  ]
+  const waxServices = [
+    {
+      title: "whole face wax",
+      description: ".",
+      price: "From $45",
+      duration: "15 min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist1",
+    },
+    {
+      title: "Nose,Eye or upper lip",
+      description: ".",
+      price: "From $15",
+      duration: "15 min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist1",
+    },
+    {
+      title: "Brow wax",
+      description: ".",
+      price: "From $10",
+      duration: "10 min",
+      imageSrc: "brow-wax.jpeg",
+      stylist: "Dahayra Arellano",
+      stylistId: "stylist5",
+    },
+    {
+      title: "Brazilian wax",
+      description: ".",
+      price: "From $65",
+      duration: "30 min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist1",
+    },
+    {
+      title: "Bikini wax(side only)",
+      description: ".",
+      price: "From $30",
+      duration: "15 min",
+      imageSrc: "/placeholder.svg?height=300&width=400",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist1",
+    },
+  ]
+
+  const getActiveServices = () => {
+    switch (activeTab) {
+      case "barber":
+        return barberServices
+      case "nails":
+        return nailServices
+      case "womens":
+        return womensServices
+      case "lashes":
+        return lashServices
+      case "waxing":
+        return waxServices
+      default:
+        return barberServices
+    }
+  }
+
+  const servicesToDisplay = showAllServices ? getActiveServices() : getActiveServices().slice(0, initialServicesToShow)
+
+  const toggleServiceDisplay = () => {
+    setShowAllServices(!showAllServices)
+  }
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
+    setShowAllServices(false)
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Navigation */}
@@ -108,7 +543,7 @@ export default function Home() {
               </div>
               <div className="relative aspect-video overflow-hidden rounded-xl lg:aspect-square">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
+                  src="/outside.jpeg"
                   alt="Salon atmosphere"
                   fill
                   className="object-cover"
@@ -129,121 +564,113 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Tabs defaultValue="hair" className="mt-8">
+            <Tabs defaultValue="barber" className="mt-8" onValueChange={handleTabChange}>
               <div className="flex justify-center">
                 <TabsList>
-                  <TabsTrigger value="hair">Hair</TabsTrigger>
+                  <TabsTrigger value="barber">Barber Cuts</TabsTrigger>
+                  <TabsTrigger value="womens">Women's Styles</TabsTrigger>
                   <TabsTrigger value="nails">Nails</TabsTrigger>
-                  <TabsTrigger value="makeup">Makeup</TabsTrigger>
-                  <TabsTrigger value="spa">Spa</TabsTrigger>
+                  <TabsTrigger value="lashes">Lashes</TabsTrigger>
+                  <TabsTrigger value="waxing">Waxing</TabsTrigger>
                 </TabsList>
               </div>
-              <TabsContent value="hair" className="mt-6">
+              <TabsContent value="barber" className="mt-6">
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <ServiceCard
-                    title="Haircut & Styling"
-                    description="Precision cutting and styling tailored to your face shape and preferences."
-                    price="From $45"
-                    duration="45 mins"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Hair Coloring"
-                    description="From subtle highlights to bold transformations using premium products."
-                    price="From $85"
-                    duration="2 hours"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Hair Treatments"
-                    description="Nourishing treatments to repair and revitalize damaged hair."
-                    price="From $65"
-                    duration="1 hour"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
+                  {servicesToDisplay.map((service: ServiceType, index: number) => (
+                    <ServiceCard
+                      key={`barber-${index}`}
+                      title={service.title}
+                      description={service.description}
+                      price={service.price}
+                      duration={service.duration}
+                      imageSrc={service.imageSrc}
+                      stylist={service.stylist}
+                      stylistId={service.stylistId}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+              <TabsContent value="womens" className="mt-6">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {servicesToDisplay.map((service: ServiceType, index: number) => (
+                    <ServiceCard
+                      key={`womens-${index}`}
+                      title={service.title}
+                      description={service.description}
+                      price={service.price}
+                      duration={service.duration}
+                      imageSrc={service.imageSrc}
+                      stylist={service.stylist}
+                      stylistId={service.stylistId}
+                    />
+                  ))}
                 </div>
               </TabsContent>
               <TabsContent value="nails" className="mt-6">
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <ServiceCard
-                    title="Manicure"
-                    description="Classic or gel manicures with a wide range of colors to choose from."
-                    price="From $35"
-                    duration="45 mins"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Pedicure"
-                    description="Relaxing foot treatment with exfoliation, massage, and polish."
-                    price="From $45"
-                    duration="1 hour"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Nail Art"
-                    description="Custom designs and embellishments to express your personal style."
-                    price="From $15"
-                    duration="30 mins"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
+                  {servicesToDisplay.map((service: ServiceType, index: number) => (
+                    <ServiceCard
+                      key={`nails-${index}`}
+                      title={service.title}
+                      description={service.description}
+                      price={service.price}
+                      duration={service.duration}
+                      imageSrc={service.imageSrc}
+                      stylist={service.stylist}
+                      stylistId={service.stylistId}
+                    />
+                  ))}
                 </div>
               </TabsContent>
-              <TabsContent value="makeup" className="mt-6">
+              <TabsContent value="lashes" className="mt-6">
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <ServiceCard
-                    title="Everyday Makeup"
-                    description="Natural-looking makeup that enhances your features for daily wear."
-                    price="From $55"
-                    duration="45 mins"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Special Occasion"
-                    description="Glamorous makeup for weddings, parties, and special events."
-                    price="From $85"
-                    duration="1 hour"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Makeup Lesson"
-                    description="Learn techniques and tips from our professional makeup artists."
-                    price="From $95"
-                    duration="1.5 hours"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
+                  {servicesToDisplay.map((service: ServiceType, index: number) => (
+                    <ServiceCard
+                      key={`lashes-${index}`}
+                      title={service.title}
+                      description={service.description}
+                      price={service.price}
+                      duration={service.duration}
+                      imageSrc={service.imageSrc}
+                      stylist={service.stylist}
+                      stylistId={service.stylistId}
+                    />
+                  ))}
                 </div>
               </TabsContent>
-              <TabsContent value="spa" className="mt-6">
+              <TabsContent value="waxing" className="mt-6">
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <ServiceCard
-                    title="Facial Treatment"
-                    description="Customized facial to address your specific skin concerns."
-                    price="From $75"
-                    duration="1 hour"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Massage Therapy"
-                    description="Relaxing massage to relieve tension and promote wellness."
-                    price="From $85"
-                    duration="1 hour"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
-                  <ServiceCard
-                    title="Body Scrub"
-                    description="Exfoliating treatment that leaves your skin smooth and refreshed."
-                    price="From $65"
-                    duration="45 mins"
-                    imageSrc="/placeholder.svg?height=300&width=400"
-                  />
+                  {servicesToDisplay.map((service: ServiceType, index: number) => (
+                    <ServiceCard
+                      key={`waxing-${index}`}
+                      title={service.title}
+                      description={service.description}
+                      price={service.price}
+                      duration={service.duration}
+                      imageSrc={service.imageSrc}
+                      stylist={service.stylist}
+                      stylistId={service.stylistId}
+                    />
+                  ))}
                 </div>
               </TabsContent>
             </Tabs>
-            <div className="mt-10 text-center">
-              <Button variant="outline" size="lg" asChild>
-                <Link href="#booking" className="flex items-center gap-2">
-                  View Full Service Menu <ChevronRight className="h-4 w-4" />
-                </Link>
+            <div className="mt-10 flex justify-center">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={toggleServiceDisplay}
+                className="mx-auto flex items-center gap-2"
+              >
+                {showAllServices ? (
+                  <>
+                    Show Less <ChevronUp className="h-4 w-4" />
+                  </>
+                ) : (
+                  <>
+                    View Full Service Menu <ChevronDown className="h-4 w-4" />
+                  </>
+                )}
               </Button>
             </div>
           </div>
