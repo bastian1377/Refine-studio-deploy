@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import Link from "next/link"
+import { useBooking } from "@/contexts/booking-context"
 
 // Staff data with phone numbers and optional Booksy URLs
 const staffMembers = [
@@ -17,7 +18,7 @@ const staffMembers = [
     name: " Yanet Mendoza",
     role: "Senior Stylist",
     specialties: ["Haircuts", "beard trims", "kids haircuts"],
-    image: "/yanet.jpeg",
+    image: "yanet.jpeg",
     phone: "(432) 385-9381",
     booksyUrl: "https://booksy.com/en-us/92903_yanet-kutz_barber-shop_36585_odessa#ba_s=sh_1", // Optional
   },
@@ -53,7 +54,7 @@ const staffMembers = [
     name: "Dahayra Arellano",
     role: "Lash artist , Cosmetologist",
     specialties: ["Lash extensions", "Cosmetology"],
-    image: "/glam.jpeg",
+    image: "glam.jpeg",
     phone: "(123) 456-7893",
     booksyUrl: "https://glambydee1993.glossgenius.com/services",
   },
@@ -62,45 +63,31 @@ const staffMembers = [
     name: "Destanie Bejarano",
     role: "hair stylist",
     specialties: ["haircuts"],
-    image: "/destanie.jpeg",
+    image: "destini.jpeg",
     phone: "(432) 225-2899",
     booksyUrl: "",
   },
 ]
 
 export function BookingSection() {
+  const { selectedStylistId, setSelectedStylistId } = useBooking()
   const [selectedStaff, setSelectedStaff] = useState(staffMembers[0].id)
   const [selectedService, setSelectedService] = useState("hair")
   const [contactMethod, setContactMethod] = useState<"call" | "text" | "online">("online")
+  const [activeTab, setActiveTab] = useState("staff")
+
+  // Update selected staff when selectedStylistId changes
+  useEffect(() => {
+    if (selectedStylistId) {
+      setSelectedStaff(selectedStylistId)
+      setActiveTab("staff")
+
+      // Clear the selected stylist ID after it's been used
+      setSelectedStylistId(null)
+    }
+  }, [selectedStylistId, setSelectedStylistId])
 
   const selectedStaffMember = staffMembers.find((staff) => staff.id === selectedStaff)
-
-  // Parse URL parameters when component mounts
-  useEffect(() => {
-    // Check if we're in the browser environment
-    if (typeof window !== "undefined") {
-      // Get the hash part of the URL (e.g., #booking?stylist=stylist2)
-      const hash = window.location.hash
-
-      // Check if the hash contains a stylist parameter
-      if (hash.includes("?stylist=")) {
-        const stylistId = hash.split("?stylist=")[1]
-
-        // Check if the stylist ID exists in our staff members
-        const stylistExists = staffMembers.some((staff) => staff.id === stylistId)
-
-        if (stylistExists) {
-          setSelectedStaff(stylistId)
-
-          // Scroll to the booking section
-          const bookingSection = document.getElementById("booking")
-          if (bookingSection) {
-            bookingSection.scrollIntoView({ behavior: "smooth" })
-          }
-        }
-      }
-    }
-  }, [])
 
   // Set default contact method based on Booksy availability
   useEffect(() => {
@@ -127,10 +114,9 @@ export function BookingSection() {
     <div className="mt-8 max-w-4xl mx-auto">
       <Card className="bg-white shadow-lg border-primary/10">
         <CardContent className="p-6">
-          <Tabs defaultValue="staff" className="mb-6">
-            <TabsList className="grid w-full grid-cols-2">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
+            <TabsList className="grid w-full grid-cols-1">
               <TabsTrigger value="staff">Choose Staff</TabsTrigger>
-              <TabsTrigger value="service">Select Service</TabsTrigger>
             </TabsList>
             <TabsContent value="staff" className="mt-6">
               <h3 className="text-xl font-bold mb-4">Select Your Stylist</h3>
@@ -175,55 +161,6 @@ export function BookingSection() {
                     </Label>
                   </div>
                 ))}
-              </RadioGroup>
-            </TabsContent>
-            <TabsContent value="service" className="mt-6">
-              <h3 className="text-xl font-bold mb-4">Select Service Category</h3>
-              <RadioGroup
-                value={selectedService}
-                onValueChange={setSelectedService}
-                className="grid gap-4 md:grid-cols-2"
-              >
-                <div className="relative">
-                  <RadioGroupItem value="hair" id="hair" className="peer sr-only" />
-                  <Label
-                    htmlFor="hair"
-                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                  >
-                    <User className="mb-3 h-6 w-6" />
-                    Hair Services
-                  </Label>
-                </div>
-                <div className="relative">
-                  <RadioGroupItem value="nails" id="nails" className="peer sr-only" />
-                  <Label
-                    htmlFor="nails"
-                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                  >
-                    <User className="mb-3 h-6 w-6" />
-                    Nail Services
-                  </Label>
-                </div>
-                <div className="relative">
-                  <RadioGroupItem value="makeup" id="makeup" className="peer sr-only" />
-                  <Label
-                    htmlFor="makeup"
-                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                  >
-                    <User className="mb-3 h-6 w-6" />
-                    Makeup Services
-                  </Label>
-                </div>
-                <div className="relative">
-                  <RadioGroupItem value="spa" id="spa" className="peer sr-only" />
-                  <Label
-                    htmlFor="spa"
-                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                  >
-                    <User className="mb-3 h-6 w-6" />
-                    Spa Services
-                  </Label>
-                </div>
               </RadioGroup>
             </TabsContent>
           </Tabs>
@@ -273,4 +210,3 @@ export function BookingSection() {
     </div>
   )
 }
-
