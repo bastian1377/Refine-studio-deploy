@@ -39,7 +39,7 @@ export default function Home() {
       duration: "50 mins",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/2767a6fecf7142eea9327ea198fae5-yanet-kutz-inspiration-bd9d4d6846c4477f8a7a375977a4c0-booksy.jpeg?size=1170x1170",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist2"
+      stylistId: "stylist1"
     },
     {
       title: "Haircut and Beard trim",
@@ -48,7 +48,7 @@ export default function Home() {
       duration: "15 mins",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/754aa7d7595d4b78b13315a69347e8-yanet-kutz-inspiration-98fbf198aa4f49409036e60b0f4c4b-booksy.jpeg?size=1170x1170",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist2"
+      stylistId: "stylist1"
     },
     {
       title: "Men's Haircuts",
@@ -57,7 +57,7 @@ export default function Home() {
       duration: "50 mins",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1132148/inspiration/fa922c698fe1482e811c6f06718306-joseluis-sanchez-inspiration-edd9ea785a72421e9cc38e790de306-booksy.jpeg?size=360x360",
       stylist: "Jose Luis",
-      stylistId: "stylist1"
+      stylistId: "stylist2"
     },
     {
       title: "Haircut and beard trim",
@@ -66,7 +66,7 @@ export default function Home() {
       duration: "1 hour",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1132148/service_photos/0c379e6f766449dcac6fe720b87f9c3f.jpeg",
       stylist: "Jose Luis",
-      stylistId: "stylist1"
+      stylistId: "stylist2"
     },
     {
       title: "kids cuts 15yrs and younger",
@@ -75,7 +75,7 @@ export default function Home() {
       duration: "40 min",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/9e8d990153ba4636b5a59a05227ebb-yanet-kutz-inspiration-8891141abf26470bafb7af2c16c75a-booksy.jpeg?size=1170x1170",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist2"
+      stylistId: "stylist1"
     },
     {
       title: "Mens haircut",
@@ -84,7 +84,7 @@ export default function Home() {
       duration: "50 min",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1290693/inspiration/418ca23c895e4f1aa4b1092c219924-pam-inspiration-793fbf7a2a3e42e98137c27f058446-booksy.jpeg?size=1170x1170",
       stylist: "Pam Chavez",
-      stylistId: "stylist3"
+      stylistId: "stylist4"
     },
     {
       title: "Mens design",
@@ -93,7 +93,7 @@ export default function Home() {
       duration: "15 min",
       imageSrc:"https://d2zdpiztbgorvt.cloudfront.net/region1/us/1290693/inspiration/4cf25ea8dc064acca8e9fb0ab365e4-pam-inspiration-4c2aaf62db684a26a8eb26e1193b36-booksy.jpeg?size=1170x1170",
       stylist: "Pam Chavez",
-      stylistId: "stylist3"
+      stylistId: "stylist4"
     },
   ]
 
@@ -207,7 +207,7 @@ export default function Home() {
       duration: "45 mins",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
     {
       title: "Shampoo",
@@ -216,7 +216,7 @@ export default function Home() {
       duration: "45 mins",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
     {
       title: "wash and style",
@@ -225,7 +225,7 @@ export default function Home() {
       duration: "30 mins",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
     {
       title: "Color no bleach",
@@ -234,7 +234,7 @@ export default function Home() {
       duration: "2 hours",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
     {
       title: "Root touch up single color",
@@ -243,7 +243,7 @@ export default function Home() {
       duration: "1h 30 min ",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
     {
       title: "Womens perm long",
@@ -252,7 +252,7 @@ export default function Home() {
       duration: "2h 55min ",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
     {
       title: "little girls perm shoulder length",
@@ -261,7 +261,7 @@ export default function Home() {
       duration: "2h 30 min ",
       imageSrc: "/placeholder.svg?height=300&width=400",
       stylist: "Yanet Mendoza",
-      stylistId: "stylist5"
+      stylistId: "stylist1"
     },
   ]
 
