@@ -33,20 +33,20 @@ export default function Home() {
   // Hair services data
   const barberServices = [
     {
-      title: "Mens haircuts",
-      description: "Standard haircut with clippers and shears.",
-      price: "From $40",
-      duration: "50 mins",
-      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/2767a6fecf7142eea9327ea198fae5-yanet-kutz-inspiration-bd9d4d6846c4477f8a7a375977a4c0-booksy.jpeg?size=1170x1170",
-      stylist: "Yanet Mendoza",
-      stylistId: "stylist1"
-    },
-    {
       title: "Haircut and Beard trim",
       description: "Standard beard work with blade.",
       price: "From 15",
       duration: "15 mins",
       imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/754aa7d7595d4b78b13315a69347e8-yanet-kutz-inspiration-98fbf198aa4f49409036e60b0f4c4b-booksy.jpeg?size=1170x1170",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist1"
+    },
+    {
+      title: "Mens haircuts",
+      description: "Standard haircut with clippers and shears.",
+      price: "From $40",
+      duration: "50 mins",
+      imageSrc: "teen.jpeg",
       stylist: "Yanet Mendoza",
       stylistId: "stylist1"
     },
@@ -64,18 +64,27 @@ export default function Home() {
       description: "Any type of haircut with beard work using clippers and shears. Line up (edge up) with trimmers and razor.",
       price: "From $40",
       duration: "1 hour",
-      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/1132148/service_photos/0c379e6f766449dcac6fe720b87f9c3f.jpeg",
+      imageSrc: "haircutb.jpeg",
       stylist: "Jose Luis",
       stylistId: "stylist2"
     },
     {
-      title: "kids cuts 15yrs and younger",
+      title: "Toddler cuts",
       description: "kids haircuts.",
       price: "From 35",
       duration: "40 min",
-      imageSrc: "https://d2zdpiztbgorvt.cloudfront.net/region1/us/92903/inspiration/9e8d990153ba4636b5a59a05227ebb-yanet-kutz-inspiration-8891141abf26470bafb7af2c16c75a-booksy.jpeg?size=1170x1170",
+      imageSrc: "kidscut.jpeg",
       stylist: "Yanet Mendoza",
       stylistId: "stylist1"
+    },
+    {
+      title: "Kids cuts",
+      description: "kids haircuts.",
+      price: "From 35",
+      duration: "40 min",
+      imageSrc: "josekids.jpeg",
+      stylist: "Jose Luis",
+      stylistId: "stylist2"
     },
     {
       title: "Mens haircut",
@@ -94,6 +103,15 @@ export default function Home() {
       imageSrc:"https://d2zdpiztbgorvt.cloudfront.net/region1/us/1290693/inspiration/4cf25ea8dc064acca8e9fb0ab365e4-pam-inspiration-4c2aaf62db684a26a8eb26e1193b36-booksy.jpeg?size=1170x1170",
       stylist: "Pam Chavez",
       stylistId: "stylist4"
+    },
+    {
+      title: "Baby cuts",
+      description: "baby haircuts.",
+      price: "From 25",
+      duration: "20 min",
+      imageSrc: "baby.jpeg",
+      stylist: "Yanet Mendoza",
+      stylistId: "stylist1"
     },
   ]
 
@@ -202,10 +220,28 @@ export default function Home() {
   const womensServices = [
     {
       title: "Women's Haircut and Styling",
-      description: "Precision cutting and styling tailored to women's preferences.",
+      description: "Layered Haircut and Styling",
       price: "From $45",
       duration: "45 mins",
-      imageSrc: "/placeholder.svg?height=300&width=400",
+      imageSrc: "redhead.jpeg",
+      stylist: "Destanie Bejarano",
+      stylistId: "stylist6"
+    },
+    {
+      title: "Color",
+      description: "Enhance your natural shade or try something new with a single-process color.",
+      price: "From $125+",
+      duration: "2+ hours",
+      imageSrc: "darkred.jpeg",
+      stylist: "Destanie Bejarano",
+      stylistId: "stylist6"
+    },
+    {
+      title: "Color",
+      description:  "Enhance your natural shade or try something new with a single-process color.",
+      price: "From $100+",
+      duration: "45 mins",
+      imageSrc: "colordark.jpeg",
       stylist: "Yanet Mendoza",
       stylistId: "stylist1"
     },
@@ -219,20 +255,11 @@ export default function Home() {
       stylistId: "stylist1"
     },
     {
-      title: "wash and style",
-      description: "Revitalizing wash with scalp massage and professional shampoo tailored to your hair type. Leaves hair clean, refreshed, and ready for styling.",
-      price: "From $15",
+      title: "Kids cut",
+      description: "",
+      price: "From $35",
       duration: "30 mins",
-      imageSrc: "/placeholder.svg?height=300&width=400",
-      stylist: "Yanet Mendoza",
-      stylistId: "stylist1"
-    },
-    {
-      title: "Color no bleach",
-      description: "Enhance your natural shade or try something new with a single-process color treatment—no bleach involved.",
-      price: "From $100+",
-      duration: "2 hours",
-      imageSrc: "/placeholder.svg?height=300&width=400",
+      imageSrc: "girlscut.jpeg",
       stylist: "Yanet Mendoza",
       stylistId: "stylist1"
     },
@@ -498,6 +525,7 @@ export default function Home() {
                     <div className="flex items-center gap-2">
                       <Clock className="h-5 w-5 text-primary" />
                       <span>Mon-Sat: 9am-7pm</span>
+                      <span>Sunday by Apointments</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="h-5 w-5 text-primary" />
@@ -685,7 +713,7 @@ export default function Home() {
         name="Raul Franco"
         quote="I had an amazing experience at Refine Studio. The staff was incredibly friendly and professional. My barber, Yanet, took the time to understand exactly what I wanted and delivered a fantastic haircut. The shop was clean and had a relaxing atmosphere. I would highly recommend Refine Studio to anyone looking for top-notch service and a great haircut."
         rating={5}
-        service="Men’s Haircut"
+        service="Men's Haircut"
       />
     </div>
 
@@ -780,7 +808,7 @@ export default function Home() {
                       <h3 className="font-medium text-lg">Hours</h3>
                       <p className="text-muted-foreground">Monday - Friday: 9am - 7pm</p>
                       <p className="text-muted-foreground">Saturday: 10am - 6pm</p>
-                      <p className="text-muted-foreground">Sunday: Closed</p>
+                      <p className="text-muted-foreground">Sunday: Closed/By Appointment</p>
                     </div>
                   </div>
                 </div>
@@ -806,6 +834,21 @@ export default function Home() {
                     >
                       <Facebook className="h-5 w-5" />
                       Facebook
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild>
+                    <Link
+                      href="https://www.yelp.com/biz/refine-studio-odessa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                        <path d="M18 14v5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-5" />
+                        <path d="M12 9V3" />
+                        <path d="m9 6 3-3 3 3" />
+                      </svg>
+                      Yelp
                     </Link>
                   </Button>
                 </div>

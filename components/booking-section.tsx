@@ -18,7 +18,7 @@ const staffMembers = [
     name: " Yanet Mendoza",
     role: "Senior Stylist",
     specialties: ["Haircuts", "beard trims", "kids haircuts"],
-    image: "yanet.jpeg",
+    image: "yanetred.jpg",
     phone: "(432) 385-9381",
     booksyUrl: "https://booksy.com/en-us/92903_yanet-kutz_barber-shop_36585_odessa#ba_s=sh_1", // Optional
   },
